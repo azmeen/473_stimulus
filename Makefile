@@ -25,7 +25,7 @@ OBJDUMP        = avr-objdump
 all: $(PRG).elf lst text eeprom
 
 $(PRG).elf: $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS) #-DF_CPU=$(F_CPU)
 
 #prevent confusion with any file named "clean"
 #the dash "-" prevents rm from erroring out with file not found
@@ -52,9 +52,9 @@ all_clean:
 
 #setup for usb programmer
 program: $(PRG).hex
-#	avrdude -p $(PROGRAMMER_TARGET) -c usbasp -e -U flash:w:$(PRG).hex 
-	avrdude -p $(PROGRAMMER_TARGET) -c usbasp -e -U flash:w:$(PRG).hex \
-                                                     -U eeprom:w:$(PRG)_eeprom.hex
+	avrdude -p $(PROGRAMMER_TARGET) -c usbasp -e -U flash:w:$(PRG).hex 
+#	avrdude -p $(PROGRAMMER_TARGET) -c usbasp -e -U flash:w:$(PRG).hex \
+                                                     -U eeprom:w:$(PRG)_eeprom.hex -v
 #	avrdude -p $(PROGRAMMER_TARGET) -c osuisp2 -e -U flash:w:$(PRG).hex 
 
 lst:  $(PRG).lst

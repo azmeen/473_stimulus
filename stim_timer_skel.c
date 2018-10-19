@@ -21,6 +21,7 @@
 #include <util/delay.h>
 #include <stdlib.h>
 #include "hd44780.h"
+#include <string.h>
 
 enum states {SR_WELCOME, SR_RANDOM_DELAY, SR_TIMING_USER, SR_RESULTS};
 
@@ -50,8 +51,8 @@ int main(void) {
     switch (state) {
       case SR_WELCOME: {
         clear_display();
-        string2lcd("REFLEX TESTER");
-        line2_col1(); 
+	string2lcd("REFLEX TESTER");
+	line2_col1(); 
         string2lcd("Press any button");
        	_delay_ms(100); // force minimum 100ms display time
        	while (PIND == 0xFF) {};
